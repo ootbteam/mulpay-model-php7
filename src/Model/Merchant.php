@@ -362,7 +362,7 @@ class Merchant implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['name_kana'] === null) {
             $invalidProperties[] = "'name_kana' can't be null";
         }
-        if (!preg_match("/^[ァ-ヶー　]+$/", $this->container['name_kana'])) {
+        if (!preg_match("/^[ァ-ヶー　]+$/u", $this->container['name_kana'])) {
             $invalidProperties[] = "invalid value for 'name_kana', must be conform to the pattern /^[ァ-ヶー　]+$/.";
         }
 
@@ -509,7 +509,7 @@ class Merchant implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable name_kana cannot be null');
         }
 
-        if ((!preg_match("/^[ァ-ヶー　]+$/", ObjectSerializer::toString($name_kana)))) {
+        if ((!preg_match("/^[ァ-ヶー　]+$/u", ObjectSerializer::toString($name_kana)))) {
             throw new \InvalidArgumentException("invalid value for \$name_kana when calling Merchant., must conform to the pattern /^[ァ-ヶー　]+$/.");
         }
 

@@ -393,7 +393,7 @@ class Payer implements ModelInterface, ArrayAccess, \JsonSerializable
             $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 40.";
         }
 
-        if (!is_null($this->container['name_kana']) && !preg_match("/^[ァ-ヶー　]+$/", $this->container['name_kana'])) {
+        if (!is_null($this->container['name_kana']) && !preg_match("/^[ァ-ヶー　]+$/u", $this->container['name_kana'])) {
             $invalidProperties[] = "invalid value for 'name_kana', must be conform to the pattern /^[ァ-ヶー　]+$/.";
         }
 
@@ -516,7 +516,7 @@ class Payer implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable name_kana cannot be null');
         }
 
-        if ((!preg_match("/^[ァ-ヶー　]+$/", ObjectSerializer::toString($name_kana)))) {
+        if ((!preg_match("/^[ァ-ヶー　]+$/u", ObjectSerializer::toString($name_kana)))) {
             throw new \InvalidArgumentException("invalid value for \$name_kana when calling Payer., must conform to the pattern /^[ァ-ヶー　]+$/.");
         }
 
